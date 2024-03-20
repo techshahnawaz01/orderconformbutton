@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <title>CodePen - Order Placed Confirmation</title>
+   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css" />
+</head>
+<style>
+   body {
+      background-color: #ffcdd2;
+      font-family: "Roboto", sans-serif;
+   }
+
+   .boxx {
+      width: 400px;
+      display: none;
+      overflow: hidden;
+   }
+
+   .road {
+      display: none;
+      background-image: linear-gradient(90deg,
+            #0e2a54 25%,
+            #ffffff 25%,
+            #ffffff 50%,
+            #0e2a54 50%,
+            #0e2a54 75%,
+            #ffffff 75%,
+            #ffffff 100%);
+      width: 100%;
+      height: 10px;
+      position: absolute;
+      top: 50%;
+      animation-delay: 2s;
+      animation-name: road;
+      animation-duration: 0.4s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+   }
+
+   .button {
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      position: absolute;
+      overflow: hidden;
+   }
+
+   .button .b1 {
+      cursor: pointer;
+      width: 450px;
+      height: 120px;
+      background-color: #0e2a54;
+      border-radius: 100px;
+      color: white;
+      text-align: center;
+      vertical-align: middle;
+      line-height: 120px;
+      font-size: 30px;
+      transition: all 0.3s ease 0s;
+   }
+
+   .package {
+      border-radius: 5px;
+      top: 33%;
+      left: 10%;
+      width: 40px;
+      height: 40px;
+      background-image: linear-gradient(#ffab00 50%, #827717);
+      position: absolute;
+      z-index: 2;
+      animation-delay: 0.5s;
+      animation-name: movepackage;
+      animation-duration: 0.7s;
+      animation-timing-function: linear, ease-in;
+   }
+
+   .lorry {
+      width: 120px;
+      height: 70px;
+      background-image: linear-gradient(#eceff1, #eeeeee);
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      border-radius: 4px;
+      animation: 0.3s movelorry;
+      animation-timing-function: ease-in-out;
+   }
+
+   .lorry .head {
+      width: 50px;
+      height: inherit;
+      background-color: red;
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      margin-left: 122px;
+   }
+
+   .head::before {
+      content: "";
+      width: 18%;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+      height: 70%;
+      top: 10px;
+      margin-left: 0px;
+      background-image: linear-gradient(to right, black, gray);
+      position: absolute;
+      border-left: 20px solid #b71c1c;
+   }
+
+   .lorry .head .clight {
+      width: 3px;
+      height: 10px;
+      background-color: yellow;
+      top: 12px;
+      margin-left: 50px;
+      position: absolute;
+      box-shadow: 0px 30px 0px 0 yellow;
+   }
+
+   .lorry .door .ld {
+      background-image: linear-gradient(#eceff1, #eeeeee);
+      width: 25px;
+      height: 5px;
+      position: absolute;
+      margin-left: -20px;
+      border-radius: 1px;
+      margin-top: 10px;
+      transform-origin: top right;
+      transform: rotate(-90deg);
+      animation-delay: 1s;
+      animation-name: doorleft;
+      animation-duration: 1.2s;
+      animation-timing-function: linear, ease-in;
+   }
+
+   .lorry .door .rd {
+      background-image: linear-gradient(#eceff1, #eeeeee);
+      width: 25px;
+      height: 5px;
+      position: absolute;
+      margin-left: -20px;
+      border-radius: 1px;
+      margin-top: 55px;
+      transform-origin: top right;
+      transform: rotate(90deg);
+      animation-delay: 1s;
+      animation-name: doorright;
+      animation-duration: 1.2s;
+      animation-timing-function: linear, ease-in;
+   }
+
+   @keyframes doorleft {
+      0% {
+         transform: rotate(-90deg);
+      }
+
+      10% {
+         transform: rotate(30deg);
+      }
+
+      100% {
+         transform: rotate(-90deg);
+         display: none;
+      }
+   }
+
+   @keyframes doorright {
+      0% {
+         transform: rotate(90deg);
+      }
+
+      10% {
+         transform: rotate(-30deg);
+      }
+
+      100% {
+         transform: rotate(100deg);
+      }
+   }
+
+   @keyframes movepackage {
+      0% {
+         transform: translate(10%, 0);
+         opacity: 1;
+      }
+
+      90% {
+         opacity: 0.8;
+      }
+
+      100% {
+         transform: translate(130%, 0);
+         opacity: 0;
+      }
+   }
+
+   @keyframes movelorry {
+      from {
+         left: 100%;
+      }
+
+      to {
+         left: 50%;
+      }
+   }
+
+   @keyframes road {
+      100% {
+         -webkit-transform: translateX(-50%);
+      }
+   }
+
+   @keyframes lorryonroad {
+      0% {
+         margin-left: -10%;
+      }
+
+      40% {
+         margin-left: -20%;
+      }
+
+      70% {
+         margin-left: 10%;
+      }
+
+      90% {
+         margin-left: -20%;
+      }
+
+      100% {
+         margin-left: 10%;
+      }
+   }
+
+   .lorryonroad {
+      animation-duration: 3s;
+      animation-delay: 2s;
+      animation-timing-function: ease-in-out;
+      animation-name: lorryonroad;
+   }
+
+   .c1,
+   .c2 {
+      width: 50px;
+      filter: sepia(100%);
+      margin-top: -10px;
+      margin-left: -2px;
+   }
+
+   svg {
+      width: 80px;
+      display: block;
+      margin: 40px auto 0;
+   }
+
+   .path {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 0;
+   }
+
+   .path.circle {
+      -webkit-animation: dash 0.9s ease-in-out;
+      animation: dash 0.9s ease-in-out;
+   }
+
+   .path.line {
+      stroke-dashoffset: 1000;
+      -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+      animation: dash 0.9s 0.35s ease-in-out forwards;
+   }
+
+   .path.check {
+      stroke-dashoffset: -100;
+      -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+      animation: dash-check 0.9s 0.35s ease-in-out forwards;
+   }
+
+   @-webkit-keyframes dash {
+      0% {
+         stroke-dashoffset: 1000;
+      }
+
+      100% {
+         stroke-dashoffset: 0;
+      }
+   }
+
+   @keyframes dash {
+      0% {
+         stroke-dashoffset: 1000;
+      }
+
+      100% {
+         stroke-dashoffset: 0;
+      }
+   }
+
+   @-webkit-keyframes dash-check {
+      0% {
+         stroke-dashoffset: -100;
+      }
+
+      100% {
+         stroke-dashoffset: 900;
+      }
+   }
+
+   @keyframes dash-check {
+      0% {
+         stroke-dashoffset: -100;
+      }
+
+      100% {
+         stroke-dashoffset: 900;
+      }
+   }
+
+   .b1 svg {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+   }
+
+   .dribbble {
+      position: absolute;
+      bottom: 10px;
+      width: 100px;
+      right: 5px;
+   }
+</style>
+
+<body>
+   <div class="button">
+      <div class="b1">Place Order</div>
+      <div class="road"></div>
+      <div class="boxx">
+         <div class="package" id="package"></div>
+         <div class="lorry">
+            <div class="door">
+               <div class="ld"></div>
+               <div class="rd"></div>
+            </div>
+            <div class="head">
+               <div class="clight">
+                  <img class="c1" src="http://pngimg.com/uploads/light/light_PNG14452.png" />
+                  <img class="c2" src="http://pngimg.com/uploads/light/light_PNG14452.png" />
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+      var myBox = document.getElementById("package");
+      myBox.addEventListener(
+         "webkitAnimationEnd",
+         function (event) {
+            myBox.style.opacity = 0;
+         },
+         false
+      );
+
+      var mybuton = document.getElementsByClassName("b1")[0];
+      mybuton.addEventListener(
+         "click",
+         function () {
+            mybuton.innerHTML = "";
+            var mybuton1 = document.getElementsByClassName("boxx")[0];
+            mybuton1.style.display = "block";
+
+            var road = document.getElementsByClassName("road")[0];
+            road.style.display = "block";
+
+            var lorry = document.getElementsByClassName("lorry")[0];
+            lorry.classList.add("lorryonroad");
+
+            setTimeout(fadeout, 5000);
+
+            function fadeout() {
+               document.getElementsByClassName("boxx")[0].style.opacity = "0";
+               document.getElementsByClassName("road")[0].style.opacity = "0";
+               mybuton.innerHTML =
+                  '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2"><circle class="path circle" fill="none" stroke="#fff" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/><polyline class="path check" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/></svg>';
+            }
+         },
+         false
+      );
+   </script>
+</body>
+
+</html>
