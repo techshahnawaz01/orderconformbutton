@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,4 +91,98 @@
     </ul>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Techshanawaz</title>
+
+</head>
+<style>
+    ul {
+        list-style: none;
+        display: grid;
+        max-width: 45rem;
+        margin-inline: auto;
+        grid-template-columns: auto 1fr;
+        gap: 2rem;
+        padding: 2rem;
+
+        >li {
+            font-weight: 600;
+            display: grid;
+            grid-template-columns: subgrid;
+            grid-column: 1/-1;
+            align-items: center;
+            gap: 2rem;
+
+            &::before,
+            &::after {
+                content: "";
+                grid-row: 1;
+                grid-column: 2;
+            }
+
+            &::before {
+                height: 1px;
+                background: hsl(0 0% 50%);
+            }
+
+            &::after {
+                height: 1rem;
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                margin-left: 0%;
+                background: hsl(calc(360deg / var(--items) * var(--i)) 100% 50%);
+                transform: translateX(-50%);
+                animation: anim 3s var(--timing) infinite alternate;
+            }
+        }
+    }
+
+    @keyframes anim {
+
+        0%,
+        10% {
+            margin-left: 0%;
+        }
+
+        90%,
+        100% {
+            margin-left: 100%;
+        }
+    }
+
+    body {
+        margin: 0;
+        font-family: system-ui, sans-serif, montserrat;
+        color: white;
+        background: #060606;
+    }
+
+    h1,
+    p {
+        text-align: center;
+    }
+
+    a {
+        color: inherit;
+    }
+</style>
+
+<body>
+    <h1>Animation Timing Function</h1>
+    <ul style="--items: 14; --n: 5">
+        <li style="--i:  0; --timing: ease"> default(ease)</li>
+        <li style="--i:  1; --timing: ease-in">ease-in</li>
+        <li style="--i:  2; --timing: ease-out">ease-out</li>
+        <li style="--i:  3; --timing: ease-in-out">ease-in-out</li>
+        <li style="--i:  4; --timing: linear">linear</li>
+        <li style="--i: 13; --timing: cubic-bezier(0.5, -0.5, 0.5, 1.5)">cubic-bezier(p1, p2, p3, p4)</li>
+    </ul>
+</body>
+
+>>>>>>> a2be13c9439e8cadfb1cd24a1e3ea4357aca1d34
 </html>
